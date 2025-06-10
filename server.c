@@ -84,7 +84,7 @@ int main() {
     // Configure the server address
     server_addr.sin_family = AF_INET;          // Use IPv4
     server_addr.sin_port = htons(5000);        // Set the port to 5000
-    server_addr.sin_addr.s_addr = INADDR_ANY;  // Listen on all available network interfaces
+    server_addr.sin_addr.s_addr = INADDR_ANY;  // Listen on all available network interfaces (No Need for Manual server IP Input)
 
     // Bind the server socket to the specified address and port
     bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
@@ -113,8 +113,6 @@ int main() {
         pthread_create(&tid, NULL, &handle_client, &client_fd);
     }
 
+    return 0; // Exit the program  
+}      
 
-
-
-}    return 0; // Exit the program    return 0; // Exit the program
-}

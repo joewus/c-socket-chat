@@ -67,9 +67,18 @@ int main() {
         // Read a message from the terminal
         fgets(message, BUFFER_SIZE, stdin);
 
+        // Check if the combined length of the nickname and message exceeds the buffer size.
+        // This ensures the message fits within the server's expected buffer size and avoids truncation or overflow.
+        if (strlen(nickname) + strlen(message) + 2 > BUFFER_SIZE) { // +2 for ": " separator
+            printf("Message too long. Please shorten your message.\n");
+            continue;
+        }
+
         // Combine the nickname and message into one string
-        char full_message[BUFFER_SIZE + 32];
+        char full_message[BUFFER_SIZE]; // +32 for nickname
         snprintf(full_message, sizeof(full_message), "%s: %s", nickname, message);
+
+
 
         // Send the message to the server
         send(sockfd, full_message, strlen(full_message), 0);
